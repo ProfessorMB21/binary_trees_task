@@ -72,9 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>studnet</TargetName>
+    <TargetExt>.cgi</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>studnet</TargetName>
+    <TargetExt>.cgi</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -135,6 +137,8 @@
   <ItemGroup>
     <ClCompile Include="cgi.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stack.cpp" />
+    <ClCompile Include="stack.h" />
     <ClCompile Include="tree.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>

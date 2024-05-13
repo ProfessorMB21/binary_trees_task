@@ -2,9 +2,9 @@
 #include "tree.h"
 #include <cmath>
 
-bool add(node*& root, int value);
-node*& get(node*& root, int value);
-bool remove(node*& root, int value);
+bool add(tree& t, Stud student);
+node* get(tree t, string value);
+void remove(tree& t, string value);
 void move_node(node* rem_el, node* root, node* parent, bool right);
 void drop(node*& root);
 
@@ -15,25 +15,25 @@ void large_right_rotate(node*& root);
 
 void balance(node*& root);
 
-bool add(tree& t, int value)
+bool add(tree& t, Stud student)
 {
-	return add(t.root, value);
+	return add(t.root, student);
 }
 
-node* get(tree t, int value)
+node* get(tree t, string value)
 {
 	return get(t.root, value);
 }
 
-void remove(tree& t, int value)
+void remove(tree& t, string value)
 {
 	remove(t.root, value);
 }
 
-bool remove(node*& root, int value)
+bool remove(node*& root, string value)
 {
 	if (!root) return false;
-	if (root->val == value)
+	if (root->m_data.m_name == value)
 	{
 		if (!root->left && !root->right)
 		{
@@ -48,7 +48,7 @@ bool remove(node*& root, int value)
 		}
 		return true;
 	}
-	auto& sub = value < root->val ? root->left : root->right;
+	auto& sub = value < root->m_data.m_name ? root->left : root->right;
 	bool r = remove(sub, value);
 	if (r) balance(root);
 	return r;
@@ -61,7 +61,7 @@ void move_node(node* rem_el, node* root, node* parent, bool right)
 		if (right) parent->right = root->left;
 		else parent->left = root->right;
 
-		rem_el->val = root->val;
+		rem_el->m_data.m_name = root->m_data.m_name;
 		rem_el->count = root->count;
 
 		delete root;
@@ -84,26 +84,27 @@ void drop(node*& root)
 	root = nullptr;
 }
 
-node*& get(node*& root, int value)
+node*& get(node*& root, string value)
 {
-	if (!root || root->val == value) return root;
-	return get(value < root->val ? root->left : root->right, value);
+	if (!root || root->m_data.m_name == value) return root;
+	return get(value < root->m_data.m_name ? root->left : root->right, value);
 }
 
-bool add(node*& root, int value)
+bool add(node*& root, Stud value)
 {
 	if (!root) {
 		node* new_node = new node;
-		new_node->val = value;
+		new_node->m_data.m_name = value.m_name;
+		new_node->m_data.m_gpa = value.m_gpa;
 		root = new_node;
 		return true;
 	}
-	if (root->val == value)
+	if (root->m_data.m_name == value.m_name)
 	{
 		root->count++;
 		return false;
 	}
-	const bool res = add(value < root->val ? root->left : root->right, value);
+	const bool res = add(value.m_name < root->m_data.m_name ? root->left : root->right, value);
 	balance(root);
 	root->height = get_tree_height(root);
 	return res;
