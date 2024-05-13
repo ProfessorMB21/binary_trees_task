@@ -1,12 +1,11 @@
 #pragma once
 #include <string>
 #include <iostream>
-using namespace std;
 
 // struct for student
 struct student_t
 {
-	string m_name;
+	std::string m_name;
 	double m_gpa;
 };
 typedef student_t Stud;
@@ -27,7 +26,7 @@ struct tree
 };
 
 bool add(tree& t, Stud student);
-node* get(tree t, string value);
-void remove(tree& t, string value);
+node* get(tree t, std::string value);
+void remove(tree& t, std::string value);
 void drop(tree& t);
 int get_tree_height(const node* root);

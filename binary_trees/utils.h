@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdarg.h>
+#include "tree.h"
 
 namespace file_io
 {

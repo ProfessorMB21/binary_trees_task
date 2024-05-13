@@ -1,10 +1,11 @@
 // This code was written by our CS professor Sergey Vladislavovich Makletsov @Smak80
 #include "tree.h"
 #include <cmath>
+using std::string;
 
-bool add(tree& t, Stud student);
-node* get(tree t, string value);
-void remove(tree& t, string value);
+bool add(node*& root, Stud value);
+node*& get(node*& root, string value);
+bool remove(node*& root, string value);
 void move_node(node* rem_el, node* root, node* parent, bool right);
 void drop(node*& root);
 
