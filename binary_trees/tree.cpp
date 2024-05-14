@@ -3,7 +3,7 @@
 #include <cmath>
 using std::string;
 
-bool add(node*& root, Stud value);
+bool add(node*& root, string _name, double _gpa);
 node*& get(node*& root, string value);
 bool remove(node*& root, string value);
 void move_node(node* rem_el, node* root, node* parent, bool right);
@@ -16,9 +16,9 @@ void large_right_rotate(node*& root);
 
 void balance(node*& root);
 
-bool add(tree& t, Stud student)
+bool add(tree& t, string _name, double _gpa)
 {
-	return add(t.root, student);
+	return add(t.root, _name, _gpa);
 }
 
 node* get(tree t, string value)
@@ -91,21 +91,21 @@ node*& get(node*& root, string value)
 	return get(value < root->m_data.m_name ? root->left : root->right, value);
 }
 
-bool add(node*& root, Stud value)
+bool add(node*& root, string _name, double _gpa)
 {
 	if (!root) {
 		node* new_node = new node;
-		new_node->m_data.m_name = value.m_name;
-		new_node->m_data.m_gpa = value.m_gpa;
+		new_node->m_data.m_name = _name;
+		new_node->m_data.m_gpa = _gpa;
 		root = new_node;
 		return true;
 	}
-	if (root->m_data.m_name == value.m_name)
+	if (root->m_data.m_name == _name)
 	{
 		root->count++;
 		return false;
 	}
-	const bool res = add(value.m_name < root->m_data.m_name ? root->left : root->right, value);
+	const bool res = add(_name < root->m_data.m_name ? root->left : root->right, _name, _gpa);
 	balance(root);
 	root->height = get_tree_height(root);
 	return res;

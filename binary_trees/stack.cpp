@@ -13,7 +13,7 @@ void push(stack_t*& stack, string _name, double _gpa)
 void push(stack_t*& stack, Stud _buf)
 {
 	stack_t* new_el = new stack_t;
-	new_el->student_name = _buf.m_name;
+	new_el->student_name = _buf.m_name.data();
 	new_el->student_gpa = _buf.m_gpa;
 	new_el->next = stack;
 	stack = new_el;

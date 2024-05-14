@@ -1,5 +1,4 @@
 #include "utils.h"
-#include "tree.h"
 
 namespace file_io
 {
@@ -28,20 +27,15 @@ namespace file_io
 		std::ifstream file(filename);
 		if (file)
 		{
-			char *_name = new char[10000];
-			char *_gpa = new char[10000];
+			std::string _name, _gpa;
 			while (!file.eof())
 			{
-				file.getline(_name, 10000);
-				file.getline(_gpa, 10000);
+				std::getline(file, _name);
+				std::getline(file, _gpa);
 
-				double pts = atof(_gpa);
-				std::string n = _name;
-				Stud new_student = { n, pts };
-				add(root, new_student);
+				double pts = atof(_gpa.data());
+				add(root, _name, pts);
 			}
-			delete[] _name;
-			delete[] _gpa;
 			file.close();
 		}
 	}

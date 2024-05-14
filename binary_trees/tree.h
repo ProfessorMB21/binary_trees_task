@@ -25,7 +25,7 @@ struct tree
 
 };
 
-bool add(tree& t, Stud student);
+bool add(tree& t, std::string _name, double _gpa);
 node* get(tree t, std::string value);
 void remove(tree& t, std::string value);
 void drop(tree& t);
