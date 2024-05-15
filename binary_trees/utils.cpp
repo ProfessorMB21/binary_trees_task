@@ -32,11 +32,30 @@ namespace file_io
 			{
 				std::getline(file, _name);
 				std::getline(file, _gpa);
-
-				double pts = atof(_gpa.data());
+				
+				double pts = std::stod(_gpa);
 				add(root, _name, pts);
 			}
 			file.close();
 		}
+	}
+
+	tree read_file_data(const char* filename)
+	{
+		tree db;
+		std::ifstream file(filename);
+		if (file)
+		{
+			std::string _name, _gpa;
+			while (!file.eof())
+			{
+				std::getline(file, _name);
+				std::getline(file, _gpa);
+
+				add(db, _name, std::stod(_gpa));
+			}
+			file.close();
+		}
+		return db;
 	}
 }

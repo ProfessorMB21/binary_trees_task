@@ -34,7 +34,7 @@ void remove(tree& t, string value)
 bool remove(node*& root, string value)
 {
 	if (!root) return false;
-	if (root->m_data.m_name == value)
+	if (root->m_name == value)
 	{
 		if (!root->left && !root->right)
 		{
@@ -49,7 +49,7 @@ bool remove(node*& root, string value)
 		}
 		return true;
 	}
-	auto& sub = value < root->m_data.m_name ? root->left : root->right;
+	auto& sub = value < root->m_name ? root->left : root->right;
 	bool r = remove(sub, value);
 	if (r) balance(root);
 	return r;
@@ -62,7 +62,7 @@ void move_node(node* rem_el, node* root, node* parent, bool right)
 		if (right) parent->right = root->left;
 		else parent->left = root->right;
 
-		rem_el->m_data.m_name = root->m_data.m_name;
+		rem_el->m_name = root->m_name;
 		rem_el->count = root->count;
 
 		delete root;
@@ -87,25 +87,25 @@ void drop(node*& root)
 
 node*& get(node*& root, string value)
 {
-	if (!root || root->m_data.m_name == value) return root;
-	return get(value < root->m_data.m_name ? root->left : root->right, value);
+	if (!root || root->m_name == value) return root;
+	return get(value < root->m_name ? root->left : root->right, value);
 }
 
 bool add(node*& root, string _name, double _gpa)
 {
 	if (!root) {
 		node* new_node = new node;
-		new_node->m_data.m_name = _name;
-		new_node->m_data.m_gpa = _gpa;
+		new_node->m_name = _name;
+		new_node->m_gpa = _gpa;
 		root = new_node;
 		return true;
 	}
-	if (root->m_data.m_name == _name)
+	if (root->m_name == _name)
 	{
 		root->count++;
 		return false;
 	}
-	const bool res = add(_name < root->m_data.m_name ? root->left : root->right, _name, _gpa);
+	const bool res = add(_name < root->m_name ? root->left : root->right, _name, _gpa);
 	balance(root);
 	root->height = get_tree_height(root);
 	return res;

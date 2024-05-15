@@ -25,4 +25,6 @@ namespace file_io
 	* @returns A tree with the data.
 	*/
 	void read_file_data(const char* filename, tree &root);
+
+	tree read_file_data(const char* filename);
 }

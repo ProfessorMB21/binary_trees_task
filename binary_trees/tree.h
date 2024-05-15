@@ -12,7 +12,9 @@ typedef student_t Stud;
 
 struct node
 {
-	Stud m_data;
+	//Stud m_data;
+	std::string m_name;
+	double m_gpa;
 	int count = 1;
 	int height = 1;
 	node* left = nullptr;
